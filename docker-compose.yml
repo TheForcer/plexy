@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  plexy:
+    build: .
+    container_name: plexy
+    restart: unless-stopped
+    volumes:
+      - ./config/:/opt/config/
+      - ./data/:/opt/data/
