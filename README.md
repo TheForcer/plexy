@@ -4,6 +4,7 @@ This is a matrix bot providing some functionality for managing movie requests fo
 In it's current state it can
 
 - Request a movie: `!plex request Deadpool`
+- List all currently requested movies: '!plex list'
 - Delete all movie requests, which are available in Plex: `!plex delete`
 - Show the x most popular movies on MovieDB: `!plex popular x`
 - Display help/command information: `!plex help` / `!plex commands`
