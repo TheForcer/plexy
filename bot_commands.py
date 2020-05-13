@@ -38,6 +38,8 @@ class Command(object):
             await self._show_help()
         elif self.command.startswith("request"):
             await self._request_movie()
+        elif self.command.startswith("list"):
+            await self._show_requests()
         elif self.command.startswith("delete"):
             await self._delete_requests()
         elif self.command.startswith("popular"):
@@ -54,8 +56,21 @@ class Command(object):
 
     async def _show_commands(self):
         """Show all available commands"""
-        text = "**Verfügbare Befehle**:<br>- `!plex help` -- Zeigt die Hilfe an.<br>- `!plex commands` -- Zeigt alle verfügbaren Befehle an.<br>- `!plex request <Filmname>` -- Fordert einen gewünschten Film an.<br>- `!plex delete` -- Löscht alle verfügbaren Anfragen in ombi.<br>- `!plex popular <Anzahl>` -- Zeigt aktuell beliebte Filme an."
+        text = "**Verfügbare Befehle**:<br>- `!plex help` -- Zeigt die Hilfe an.<br>- `!plex commands` -- Zeigt alle verfügbaren Befehle an.<br>- `!plex request <Filmname>` -- Fordert einen gewünschten Film an.<br>- `!plex list` -- Listet alle angefragten Filme auf.<br>- `!plex delete` -- Löscht alle verfügbaren Anfragen in ombi.<br>- `!plex popular <Anzahl>` -- Zeigt aktuell beliebte Filme an."
         await send_text_to_room(self.client, self.room.room_id, text)
+
+    async def _show_requests(self):
+        """Shows the movies which are currently requested in Ombi."""
+        requests = self.plexy.getAvailRequests(available=False)
+        text = "Das sind die aktuell in Ombi angefragten Filme:"
+        if not requests:
+            text = f"Aktuell sind keine Filme angefragt!"
+            await send_text_to_room(self.client, self.room.room_id, text)
+            return
+        for movie in requests:
+            text = f"{text}<br>- [{movie['title']}](https://www.themoviedb.org/movie/{movie['theMovieDbId']})"
+        await send_text_to_room(self.client, self.room.room_id, text)
+        return
 
     async def _show_popular_movies(self):
         """Shows the most popular movies from MovieDB"""

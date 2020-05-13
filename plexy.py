@@ -12,7 +12,7 @@ class Plexy(object):
         """
         self.config = config
 
-    def getAvailRequests(self):
+    def getAvailRequests(self, available=True):
         """Return a list of all available movie requests from ombi"""
         url = f"{self.config.url}/api/v1/Request/movie"
 
@@ -23,7 +23,9 @@ class Plexy(object):
             requests.request("GET", url, data=payload, headers=headers).text
         )
         json_list = [str(dict["id"]) for dict in json_data if dict["available"]]
-        return json_list
+        if available:
+            return json_list
+        return json_data
 
     def delAvailRequests(self, availRequests):
         """Delete movie request given in the given list"""
