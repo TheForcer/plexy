@@ -10,6 +10,7 @@ In it's current state it can
 - Display help/command information: `!plex help` / `!plex commands`
 
 You can use the provided docker-compose.yml file to build and run a Docker version of the bot. Edit the sample config file beforehand and make sure it's called `config.yaml` afterwards.
+With the upcoming refactor of the nio-template, the Dockerfile will be improved and End2End encryption will be enabled.
 
 ## Project structure
 
