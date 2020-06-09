@@ -64,7 +64,7 @@ class Command(object):
         requests = self.plexy.getAvailRequests(available=False)
         text = "Das sind die aktuell in Ombi angefragten Filme:"
         if not requests:
-            text = f"Aktuell sind keine Filme angefragt!"
+            text = "Aktuell sind keine Filme angefragt!"
             await send_text_to_room(self.client, self.room.room_id, text)
             return
         for movie in requests:
@@ -92,7 +92,7 @@ class Command(object):
                         f"{text}<br>- [{x[1]}](https://www.themoviedb.org/movie/{x[0]})"
                     )
             except ValueError:
-                text = f"Du hast keine gültige Zahl (1-15) eingegeben."
+                text = "Du hast keine gültige Zahl (1-15) eingegeben."
 
         await send_text_to_room(self.client, self.room.room_id, text)
         return
