@@ -2,4 +2,4 @@ matrix-nio>=0.18.1
 Markdown>=3.3.4
 PyYAML>=5.4.1
 requests==2.34.2
-python-dateutil==2.9.0.post0
+python-dateutil==4.0.0
